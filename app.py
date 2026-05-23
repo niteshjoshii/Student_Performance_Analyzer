@@ -2,23 +2,11 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import os
-
-# PAGE TITLE
-
 st.title("Student Performance Analyzer")
-
-# CSV FILE
-
 file = "student_data.csv"
-
-# LOAD DATA
-
 if os.path.exists(file):
-
     df = pd.read_csv(file)
-
 else:
-
     df = pd.DataFrame(columns=[
         "Name",
         "Math",
@@ -30,21 +18,13 @@ else:
         "Result"
     ])
 
-# FORM INPUT
-
 st.subheader("Enter Student Details")
-
 name = st.text_input("Student Name")
-
 math = st.number_input("Math Marks", 0, 100)
-
 science = st.number_input("Science Marks", 0, 100)
-
 english = st.number_input("English Marks", 0, 100)
-
 computer = st.number_input("Computer Marks", 0, 100)
 
-# SUBMIT BUTTON
 
 if st.button("Add Student"):
 
@@ -74,13 +54,10 @@ if st.button("Add Student"):
 
     st.success("Student Added Successfully!")
 
-# SHOW DATA
-
 st.subheader(" Student Records")
 
 st.dataframe(df)
 
-# SUBJECT AVERAGE
 
 if not df.empty:
 
@@ -92,7 +69,6 @@ if not df.empty:
 
     st.write(subject_avg)
 
-    # BAR CHART
 
     fig = px.bar(
         x=subject_avg.index,
@@ -106,7 +82,6 @@ if not df.empty:
 
     st.plotly_chart(fig)
 
-    # TOPPER
 
     st.subheader("Top Performer")
 
@@ -116,7 +91,6 @@ if not df.empty:
         f'{topper["Name"]} scored {topper["Total"]}'
     )
 
-    # RESULT COUNT
 
     st.subheader("Pass/Fail Analysis")
 
